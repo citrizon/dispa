@@ -18,3 +18,4 @@ install.lib:
     action: os.shell
     cmdlines:
         - "cp libdispa.so /usr/lib/libdispa.so"
+        - "cp dispa /usr/bin/dispa"

@@ -1,6 +1,6 @@
 # Dispa
 Dispa is a simple system status indicator written in gtkmm 4<br>
-![preview](https://github.com/System64fumo/sysvol/blob/main/preview.gif "preview")
+![preview](./preview.gif "preview")
 
 
 # Configuration
