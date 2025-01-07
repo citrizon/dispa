@@ -16,7 +16,7 @@ void quit(int signum) {
 }
 
 void load_libsyshud() {
-	void* handle = dlopen("libsyshud.so", RTLD_LAZY);
+	void* handle = dlopen("libdispa.so", RTLD_LAZY);
 	if (!handle) {
 		std::cerr << "Cannot open library: " << dlerror() << '\n';
 		exit(1);
@@ -38,23 +38,23 @@ int main(int argc, char* argv[]) {
 	std::map<std::string, std::map<std::string, std::string>> config;
 	std::map<std::string, std::map<std::string, std::string>> config_usr;
 
-	bool cfg_sys = std::filesystem::exists("/usr/share/sys64/hud/config.conf");
-	bool cfg_sys_local = std::filesystem::exists("/usr/local/share/sys64/hud/config.conf");
-	bool cfg_usr = std::filesystem::exists(std::string(getenv("HOME")) + "/.config/sys64/hud/config.conf");
+	bool cfg_sys = std::filesystem::exists("/usr/share/dispa/dispa.conf");
+	bool cfg_sys_local = std::filesystem::exists("/usr/local/share/dispa/dispa.conf");
+	bool cfg_usr = std::filesystem::exists(std::string(getenv("HOME")) + "/.config/dispa/dispa.conf");
 
 	// Load default config
 	if (cfg_sys)
-		config_path = "/usr/share/sys64/hud/config.conf";
+		config_path = "/usr/share/dispa/dispa.conf";
 	else if (cfg_sys_local)
-		config_path = "/usr/local/share/sys64/hud/config.conf";
+		config_path = "/usr/local/share/dispa/dispa.conf";
 	else
-		std::fprintf(stderr, "No default config found, Things will get funky!\n");
+		std::fprintf(stderr, "No default config found.\n");
 
 	config = config_parser(config_path).data;
 
 	// Load user config
 	if (cfg_usr)
-		config_path = std::string(getenv("HOME")) + "/.config/sys64/hud/config.conf";
+		config_path = std::string(getenv("HOME")) + "/.config/dispa/dispa.conf";
 	else
 		std::fprintf(stderr, "No user config found\n");
 
@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
 
 	// Sanity check
 	if (!(cfg_sys || cfg_sys_local || cfg_usr)) {
-		std::fprintf(stderr, "No config available, Something ain't right here.");
+		std::fprintf(stderr, "No config available, Bailing out.");
 		return 1;
 	}
 	#endif
@@ -131,9 +131,9 @@ int main(int argc, char* argv[]) {
 
 			case 'h':
 			default :
-				std::cout << "usage:" << std::endl;
-				std::cout << "  syshud [argument...]:\n" << std::endl;
-				std::cout << "arguments:" << std::endl;
+				std::cout << "Usage:" << std::endl;
+				std::cout << "  dispa [argument...]:\n" << std::endl;
+				std::cout << "Arguments:" << std::endl;
 				std::cout << "  -p	Set position" << std::endl;
 				std::cout << "  -o	Set orientation" << std::endl;
 				std::cout << "  -W	Set window width" << std::endl;
@@ -159,7 +159,7 @@ int main(int argc, char* argv[]) {
 	#endif
 
 	// Load the application
-	app = Gtk::Application::create("funky.sys64.syshud");
+	app = Gtk::Application::create("one.citri.dispa");
 	app->hold();
 
 	load_libsyshud();

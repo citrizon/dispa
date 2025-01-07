@@ -1,12 +1,12 @@
-BIN = syshud
-LIB = libsyshud.so
+BIN = dispa
+LIB = libdispa.so
 PKGS = gtkmm-4.0 gtk4-layer-shell-0
 SRCS = $(wildcard src/*.cpp)
 
-PREFIX ?= /usr/local
+PREFIX ?= /usr
 BINDIR ?= $(PREFIX)/bin
 LIBDIR ?= $(PREFIX)/lib
-DATADIR ?= $(PREFIX)/share
+DATADIR ?= $(HOME)
 
 SRCS := $(filter-out src/wireplumber.cpp,$(SRCS))
 SRCS := $(filter-out src/pulse.cpp,$(SRCS))
@@ -52,7 +52,7 @@ install: $(all)
 	@echo "Installing..."
 	@install -D -t $(DESTDIR)$(BINDIR) $(BIN)
 	@install -D -t $(DESTDIR)$(LIBDIR) $(LIB)
-	@install -D -t $(DESTDIR)$(DATADIR)/sys64/hud config.conf style.css
+	@install -D -t $(DESTDIR)$(DATADIR)/dispa dispa.conf style.css
 
 clean:
 	@echo "Cleaning up"

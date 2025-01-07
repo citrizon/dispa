@@ -1,0 +1,20 @@
+?settings:
+    quiet: true
+
+default:
+    action: os.shell
+    cmdlines:
+        - "make"
+
+install:
+    action: os.shell
+    cmdlines:
+        - "mkdir -p ~/.config/dispa"
+        - "cp style.css ~/.config/dispa/style.css"
+        - "cp dispa.conf ~/.config/dispa/dispa.conf"
+        - "echo Done! Please run \"sudo lusk make install.lib\""
+
+install.lib:
+    action: os.shell
+    cmdlines:
+        - "cp libdispa.so /usr/lib/libdispa.so"
